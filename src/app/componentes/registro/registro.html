@@ -1,37 +1,61 @@
-<div class="row justify-content-center mt-5">
-  <div class="col-12 col-md-10 col-lg-6">
-    <div class="card shadow border-0 rounded-3">
-      <div class="card-body p-5">
-        <h2 class="text-center fw-bold mb-4 text-success">Crear Cuenta</h2>
-        
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+    
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-success text-white text-center rounded-top-4 py-4">
+        <h2 class="fw-bold mb-0">Registrarse</h2>
+      </div>
+      
+      <div class="card-body p-4 p-md-5">
         <form>
-          <div class="row g-3 mb-3">
-            <div class="col-md-6">
-              <div class="form-floating">
-                <input type="text" class="form-control" id="nombreInput" placeholder="Nombre">
-                <label for="nombreInput">Nombre</label>
-              </div>
+          @if (errorMsg()) {
+            <div class="alert alert-danger border-0 small mb-3">
+              {{ errorMsg() }}
             </div>
-            <div class="col-md-6">
-              <div class="form-floating">
-                <input type="text" class="form-control" id="apellidoInput" placeholder="Apellido">
-                <label for="apellidoInput">Apellido</label>
-              </div>
-            </div>
+          }
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-3" id="nombre" placeholder="Nombre">
+            <label for="nombre">Nombre</label>
           </div>
           
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="emailRegistro" placeholder="nombre@ejemplo.com">
-            <label for="emailRegistro">Correo Electrónico</label>
+            <input type="text" class="form-control rounded-3" id="apellido" placeholder="Apellido">
+            <label for="apellido">Apellido</label>
           </div>
-          <div class="form-floating mb-4">
-            <input type="password" class="form-control" id="passRegistro" placeholder="Contraseña">
-            <label for="passRegistro">Contraseña</label>
+
+          <div class="form-floating mb-3">
+            <input type="email" name="email" [(ngModel)]="email" class="form-control rounded-3" id="correo" placeholder="Correo electrónico">
+            <label for="correo">Correo electrónico</label>
           </div>
           
-          <button type="submit" class="btn btn-success w-100 py-2 fs-5 shadow-sm">Registrarme</button>
+          <div class="form-floating mb-4">
+            <input type="password" name="clave" [(ngModel)]="clave" class="form-control rounded-3" id="pass" placeholder="Contraseña">
+            <label for="pass">Contraseña</label>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button 
+              (click)="registrar()" 
+              [disabled]="cargando()" 
+              class="btn btn-success btn-lg fw-bold rounded-pill shadow-sm" 
+              type="button">
+              
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm" role="status"></span>
+                Enviando...
+              } @else {
+                Registrarse
+              }
+            </button>
+          </div>
         </form>
       </div>
+      
+      <div class="card-footer text-center bg-light py-3 rounded-bottom-4 border-0">
+        <small class="text-muted">¿Ya tenes cuenta? <a href="/login" class="text-success fw-bold text-decoration-none">Inicia sesion aca</a></small>
+      </div>
     </div>
+
   </div>
 </div>

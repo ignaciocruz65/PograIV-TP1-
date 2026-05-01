@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class QuienSoy implements OnInit {
   miPerfil = signal<any>(null);
+  
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
     const urlGithub = 'https://api.github.com/users/ignaciocruz65'; 

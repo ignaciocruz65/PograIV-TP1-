@@ -1,20 +1,54 @@
-<div class="row justify-content-center mt-5">
-  <div class="col-12 col-md-8 col-lg-5">
-    <div class="card shadow border-0 rounded-3">
-      <div class="card-body p-5">
-        <h2 class="text-center fw-bold mb-4 text-primary">Iniciar Sesion</h2>
-        
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white text-center rounded-top-4 py-4">
+        <h2 class="fw-bold mb-0">Iniciar Sesión</h2>
+      </div>
+
+      <div class="card-body p-4 p-md-5">
         <form>
+          @if (errorMsg()) {
+            <div class="alert alert-danger p-2 small border-0 mb-3 text-center">
+              {{ errorMsg() }}
+            </div>
+          }
+
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com">
-            <label for="floatingInput">Correo Electrónico</label>
+            <input type="email" name="email" [(ngModel)]="email" class="form-control rounded-3" id="emailInput" placeholder="email">
+            <label for="emailInput">Correo electronico</label>
           </div>
+
           <div class="form-floating mb-4">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
-            <label for="floatingPassword">Contraseña</label>
+            <input type="password" name="clave" [(ngModel)]="clave" class="form-control rounded-3" id="passInput" placeholder="pass">
+            <label for="passInput">Contraseña</label>
           </div>
-          <button type="submit" class="btn btn-primary w-100 py-2 fs-5 shadow-sm">Entrar a la Sala</button>
+
+          <div class="d-grid gap-2">
+            <button (click)="ingresar()" [disabled]="cargando()" class="btn btn-primary btn-lg fw-bold rounded-pill shadow-sm" type="button">
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm"></span>
+              } @else {
+                Ingresar
+              }
+            </button>
+          </div>
         </form>
+      </div>
+
+      <div class="mt-4 text-center">
+            <p class="text-muted small mb-2">Acceso Rapido</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button (click)="accesoRapido('catzat@gmail.com', 'kamzat')" type="button" class="btn btn-sm btn-outline-secondary rounded-pill">
+                Admin
+              </button>
+            </div>
+          </div>
+
+
+
+      <div class="card-footer text-center bg-light py-3 rounded-bottom-4 border-0">
+        <small class="text-muted">¿No tenes cusenta? <a href="/registro" class="text-primary fw-bold text-decoration-none">Registrate aca</a></small>
       </div>
     </div>
   </div>
