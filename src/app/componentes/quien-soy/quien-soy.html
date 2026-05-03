@@ -1,39 +1,53 @@
-<div class="container py-5">
+<div class="container py-5 mt-4">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
       
-      <h1 class="display-5 fw-bold text-center mb-5">Sobre Mí</h1>
+      <h1 class="display-5 fw-bolder text-center mb-5 text-dark">Sobre Mí</h1>
+      
       @if (miPerfil()) {
-      <div class="card shadow-lg border-0 rounded-4 text-center overflow-hidden">
-        <div class="card-body p-4">
-          
-          <img [src]="miPerfil().avatar_url" alt="fotogithub" class="img-fluid rounded-circle border border-4 border-light shadow-sm mb-4" >
-          <h2 class="card-title fw-bold h3 mb-2">{{ miPerfil().name}}</h2>
-          
-          <div class="d-flex justify-content-center gap-2 mb-3">
-            <span class="badge rounded-pill bg-primary px-3">ID: {{ miPerfil().id }}</span>
-            <span class="badge rounded-pill bg-dark px-3">Desde: {{ miPerfil().created_at }}</span>
-          </div>
-          <p class="card-text text-muted mb-4"> {{ miPerfil().bio}}</p>
-          <div class="d-grid">
-            <a [href]="miPerfil().html_url" target="_blank" class="btn btn-dark btn-lg rounded-pill shadow-sm"> Ver Perfil de GitHub
-            </a>
-          </div>
+      <div class="glass-card shadow-lg border-0 rounded-4 text-center px-4 pb-4 pt-0 mt-5">
+        
+
+        <img [src]="miPerfil().avatar_url" 
+             alt="Foto de perfil GitHub" 
+             class="img-fluid rounded-circle border border-5 border-white shadow mb-3 bg-white hover-scale" 
+             style="width: 150px; height: 150px; object-fit: cover; margin-top: -55px;">
+        <h2 class="card-title fw-bold h3 mb-0">{{ miPerfil().name}}</h2>
+        <p class="text-muted small mb-4">@{{ miPerfil().login }}</p>
+        
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+          <span class="badge rounded-pill bg-primary px-3 py-2 shadow-sm">
+            ID: {{ miPerfil().id }}
+          </span>
+          <span class="badge rounded-pill bg-dark px-3 py-2 shadow-sm">
+            Desde: {{ miPerfil().created_at}}
+          </span>
+        </div>
+        <p class="card-text text-secondary mb-4 px-md-3 lh-lg"> 
+          {{ miPerfil().bio }}
+        </p>
+        
+        <div class="d-grid mb-2">
+          <a [href]="miPerfil().html_url" target="_blank" class="btn btn-dark btn-lg rounded-pill shadow hover-scale"> 
+            Ver Perfil de GitHub ➔
+          </a>
         </div>
       </div>
       } @else {
-        <div class="d-flex flex-column align-items-center my-5">
-          <div class="spinner-border text-primary mb-2" role="status"></div>
-          <p class="text-muted">Pidiendo los datos de GitHub</p>
+        <div class="glass-card d-flex flex-column align-items-center justify-content-center py-5 rounded-4 shadow-sm">
+          <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+          <p class="text-muted fw-semibold mb-0">Conectando con GitHub...</p>
         </div>
       }
 
-      <hr class="my-5 opacity-25">
+      <hr class="my-5 border-secondary opacity-25">
 
-      <div class="bg-light p-4 rounded-4 border border-1 text-center shadow-sm">
-        <h2 class="h4 fw-bold mb-3 text-secondary">Mi Juego Propio: Emm lo estoy pensando</h2>
-        <div class="alert alert-info border-0 shadow-sm mb-0">
-          <p class="mb-0 fw-semibold">Lo sigo pensando...</p>
+      <div class="glass-card p-4 rounded-4 text-center shadow-sm position-relative overflow-hidden">
+        <div class="position-absolute top-0 start-0 w-100" style="height: 5px; background: linear-gradient(90deg, #667eea, #764ba2);"></div>
+        <h3 class="h4 fw-bold mb-3 text-dark mt-2">Mi Juego Propio</h3>
+        
+        <div class="alert bg-light border border-secondary border-opacity-10 shadow-sm mb-0 rounded-3">
+          <p class="mb-0 fw-semibold text-muted">Emm... lo sigo pensando. ¡Pronto habrá novedades!</p>
         </div>
       </div>
 

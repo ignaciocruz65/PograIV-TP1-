@@ -1,0 +1,19 @@
+.profile-img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin-top: -80px;
+    background-color: #fff;
+}
+
+.utn-badge {
+    background-color: #005b9f;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}

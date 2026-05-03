@@ -1,0 +1,39 @@
+.mesa-juego {
+    background: radial-gradient(circle, #2c3e50 0%, #1a252f 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    color: white;
+}
+
+.carta-en-juego {
+    width: 160px;
+    height: 230px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border: 2px solid #e0e0e0;
+    transition: transform 0.2s ease;
+}
+
+.carta-en-juego-text {
+    font-size: 6rem;
+    font-weight: 800;
+    color: #212529;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-jugar-denuevo {
+    background: linear-gradient(45deg, #00b09b, #96c93d);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-jugar-denuevo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 176, 155, 0.4);
+}

@@ -1,0 +1,41 @@
+.linecard {
+    border-left: 5px solid #4810cc;
+}
+.bienvenida {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    box-shadow: 0 10px 30px rgba(118, 75, 162, 0.918);
+}
+
+.bground {
+    background-color: #001c64b9;
+    color: #000000;
+    overflow: hidden;
+    position: relative;
+}
+
+.video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    width: 1938px;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+}
+
+
+@media (max-width: 768px) {
+    .bground {
+        background: url(http://denis-creative.com/wp-content/uploads/2018/01/about-bg.jpg)
+        0 top no-repeat #0e438b;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    .video,
+    .bground-header-bg-2 {
+        display: none;
+    }
+}

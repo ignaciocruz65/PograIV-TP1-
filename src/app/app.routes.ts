@@ -25,7 +25,6 @@ export const routes: Routes = [
     },
     {
         path: 'juegos',
-        canActivate: [authGuard],
         loadChildren: () => import('./modulos/juegos/juegos.routes').then(c => c.JUEGOS_ROUTES)
     },
     {

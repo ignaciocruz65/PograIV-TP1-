@@ -6,7 +6,6 @@ import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 
 })
 
-
 export class AuthService {
   usuarioActual = signal<any>(null);
   private supabase: SupabaseClient;
@@ -23,15 +22,42 @@ export class AuthService {
       this.usuarioActual.set(session?.user ?? null);
       console.log('sesion iniciada:', event, session?.user?.email);
     });
+
+    this.supabase = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+      storage: window.sessionStorage,
+      autoRefreshToken: true,
+      persistSession: true
+    }
+    });
   }
 
 
-  async registrarUsuario(email: string, clave: string) {
+
+
+  async registrarUsuario(email: string, clave: string, nombre: string, apellido: string, edad: number) {
     const { data, error } = await this.supabase.auth.signUp({
       email: email,
       password: clave,
     });
     if (error) throw error;
+
+    if (data.user) {
+      const { error: dbError } = await this.supabase.from('usuarios').insert([
+        {
+          auth_id: data.user.id,
+          correo: email,
+          nombre: nombre,
+          apellido: apellido,
+          edad: edad
+        }
+      ]);
+
+      if (dbError) {
+        console.error("Error al guardar en BD:", dbError);
+        throw new Error('El usuario se autenticó pero hubo un error al guardar sus datos.');
+      }
+    }
     return data;
   }
 
