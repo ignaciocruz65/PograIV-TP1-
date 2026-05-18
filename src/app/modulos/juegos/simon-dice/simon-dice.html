@@ -1,0 +1,64 @@
+<div class="simon-wrapper container-fluid flex-grow-1 d-flex flex-column align-items-center justify-content-center py-4">
+
+    <div class="game-card card shadow-lg border-0 rounded-4 w-100" style="max-width: 500px;">
+
+        <div class="card-header bg-dark text-white p-3 d-flex justify-content-between align-items-center border-0">
+            <h4 class="mb-0 fw-bold tracking-wide"><i class="bi bi-bullseye text-warning me-2"></i>Simón Dice</h4>
+            <span class="badge bg-warning text-dark fs-6 shadow-sm px-3 py-2 rounded-pill border border-warning">
+                Nivel: {{ puntaje() }}
+            </span>
+        </div>
+
+        <div class="card-body p-4 p-md-5 d-flex flex-column align-items-center dark-board">
+
+            <div class="mb-5 text-center" style="min-height: 30px;">
+                @if (estadoJuego() === 'esperando') {
+                    <h5 class="text-white-50 fw-bold tracking-wide">Presioná INICIAR para comenzar</h5>
+                } @else if (estadoJuego() === 'mostrando') {
+                    <h5 class="text-warning fw-bold animate__animated animate__flash animate__infinite tracking-wide">
+                        Atención a la secuencia...
+                    </h5>
+                } @else if (estadoJuego() === 'jugando') {
+                    <h5 class="text-success fw-bold tracking-wide">¡Tu turno! Repetí la secuencia</h5>
+                }
+            </div>
+
+            <div class="simon-board mb-4 shadow-lg">
+                <div class="simon-btn btn-verde top-left" 
+                     [class.active]="botonActivo() === 0"
+                     (click)="seleccionarColor(0)"></div>
+
+                <div class="simon-btn btn-rojo top-right" 
+                     [class.active]="botonActivo() === 1"
+                     (click)="seleccionarColor(1)"></div>
+
+                <div class="simon-btn btn-amarillo bottom-left" 
+                     [class.active]="botonActivo() === 2"
+                     (click)="seleccionarColor(2)"></div>
+
+                <div class="simon-btn btn-azul bottom-right" 
+                     [class.active]="botonActivo() === 3"
+                     (click)="seleccionarColor(3)"></div>
+
+                <div class="simon-center bg-dark shadow-lg d-flex align-items-center justify-content-center"
+                     (click)="estadoJuego() === 'esperando' ? iniciarJuego() : null"
+                     [style.cursor]="estadoJuego() === 'esperando' ? 'pointer' : 'default'">
+                    
+                    @if (estadoJuego() === 'esperando') {
+                        <i class="bi bi-play-fill text-white display-4 ms-1 play-icon"></i>
+                    } @else {
+                        <span class="text-white fw-black fs-1">{{ puntaje() }}</span>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer text-center rounded-bottom-4 border-0 p-3" style="background-color: #15151e;">
+            <button class="btn btn-outline-light rounded-pill fw-bold px-5 action-btn" (click)="salir()">
+                <i class="bi bi-box-arrow-left me-2"></i>Salir a la Sala
+            </button>
+        </div>
+
+    </div>
+</div>

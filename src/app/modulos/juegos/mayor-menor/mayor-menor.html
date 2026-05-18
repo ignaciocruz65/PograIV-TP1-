@@ -1,39 +1,80 @@
-<div class="container py-5 d-flex justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6 glass-card p-4">
+<div class="mayor-menor-wrapper container-fluid flex-grow-1 d-flex justify-content-center align-items-center py-4">
+  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+    
+    <div class="game-card card shadow-lg border-0 rounded-4 overflow-hidden mx-auto">
+      
+      <div class="card-header bg-dark text-white p-3 d-flex justify-content-between align-items-center border-0">
+        <h4 class="mb-0 fw-bold"><i class="bi bi-suit-spade-fill text-warning me-2"></i>Mayor o Menor</h4>
+        <span class="badge bg-warning text-dark fs-6 shadow-sm px-3 py-2 rounded-pill border border-dark">
+          Puntaje: {{ puntaje() }}
+        </span>
+      </div>
+
+      <div class="card-body p-4 p-md-5 text-center casino-felt">
         
-        <div class="mesa-juego text-center shadow-lg">
-        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
-            <span class="text-white-50 fw-bold text-uppercase tracking-wide small">Puntuación</span>
-            <span class="fs-3 fw-bold text-warning">{{ puntaje() }}</span>
+        <h5 class="fw-bold text-white mb-5 text-shadow tracking-wide">{{ mensaje() }}</h5>
+
+        <div class="row align-items-center justify-content-center mb-5">
+          
+          <div class="col-5 col-sm-4">
+            <div class="deck-container position-relative">
+              <img src="https://deckofcardsapi.com/static/img/back.png" 
+                   alt="Mazo" 
+                   class="img-fluid rounded-2 shadow-card" 
+                   style="max-height: 250px;">
+              
+              <div class="remaining-badge position-absolute top-50 start-50 translate-middle">
+                <span class="badge rounded-pill bg-dark text-warning fs-5 border border-warning shadow">
+                  {{ restantes() }}
+                </span>
+              </div>
+              <div class="mt-3 fw-bold text-white-50 small tracking-wide">MAZO</div>
+            </div>
+          </div>
+
+          <div class="col-2 fs-1 text-warning animate__animated animate__pulse animate__infinite">
+            <i class="bi bi-arrow-right-circle-fill shadow-icon"></i>
+          </div>
+
+          <div class="col-5 col-sm-4">
+            @if (cargando() && !cartaActual()) {
+              <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+            } @else if (cartaActual()) {
+              <div class="card-display animate__animated animate__fadeInRight">
+                <img [src]="cartaActual()?.image" 
+                     [alt]="cartaActual()?.code" 
+                     class="img-fluid rounded-2 shadow-card active-card" 
+                     style="max-height: 250px;">
+                <div class="mt-3 fw-bold text-warning small tracking-wide">ACTUAL</div>
+              </div>
+            }
+          </div>
         </div>
 
-        <p class="text-light fw-semibold mb-5 text-uppercase" style="letter-spacing: 2px;">
-            {{ mensaje() }}
-        </p>
-
-        <div class="carta-en-juego mb-5">
-            <span class="carta-en-juego-text">{{ cartaActual() }}</span>
-        </div>
-
-        <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-            <button (click)="jugar('mayor')" [disabled]="juegoTerminado()" 
-                    class="btn btn-outline-light btn-lg fw-bold px-5 py-3 text-uppercase w-100 rounded-pill hover-scale">
-            Mayor
-            </button>
-            <button (click)="jugar('menor')" [disabled]="juegoTerminado()" 
-                    class="btn btn-light btn-lg fw-bold px-5 py-3 text-uppercase w-100 rounded-pill text-dark hover-scale">
-            Menor
-            </button>
+        <div class="d-flex justify-content-center gap-3 gap-md-4 mb-2">
+          <button class="btn btn-action btn-mayor btn-lg rounded-pill px-4 px-md-5 fw-bold shadow" 
+                  (click)="jugar('mayor')" 
+                  [disabled]="juegoTerminado() || cargando()">
+            <i class="bi bi-arrow-up-circle-fill me-1"></i> MAYOR
+          </button>
+          
+          <button class="btn btn-action btn-menor btn-lg rounded-pill px-4 px-md-5 fw-bold shadow" 
+                  (click)="jugar('menor')" 
+                  [disabled]="juegoTerminado() || cargando()">
+            <i class="bi bi-arrow-down-circle-fill me-1"></i> MENOR
+          </button>
         </div>
 
         @if (juegoTerminado()) {
-            <div class="mt-5 pt-4 border-top border-secondary fade-in">
-            <button (click)="reiniciar()" class="btn btn-jugar-denuevo btn-lg fw-bold w-100 text-uppercase rounded-pill py-3 shadow">
-                Jugar de Nuevo
+          <div class="mt-5 pt-4 border-top border-light border-opacity-25 animate__animated animate__fadeInUp">
+            <button class="btn btn-warning btn-lg rounded-pill px-5 fw-bold shadow-sm text-dark" (click)="reiniciar()">
+              <i class="bi bi-arrow-clockwise me-2"></i> Jugar de Nuevo
             </button>
-            </div>
+          </div>
         }
-        </div>
-
+      </div>
     </div>
+  </div>
 </div>

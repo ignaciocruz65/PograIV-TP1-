@@ -1,0 +1,178 @@
+<div class="ranking-wrapper container-fluid flex-grow-1 py-5 animate__animated animate__fadeIn">
+    <div class="text-center mb-5 mt-3">
+        <h1 class="display-4 fw-black text-white text-shadow text-uppercase tracking-wide">Ranking Global</h1>
+        <p class="lead text-info fw-semibold">El salón de la fama de nuestra sala de juegos</p>
+    </div>
+
+    @if (cargando()) {
+        <div class="d-flex justify-content-center py-5">
+            <div class="spinner-grow text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+    } @else {
+        <div class="row g-4 justify-content-center px-2 px-md-4">
+            
+            <div class="col-12 col-xl-6">
+                <div class="ranking-card card h-100 shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-dark text-white p-3 border-0 rounded-top-4" style="border-bottom: 2px solid #ffc107 !important;">
+                        <h4 class="mb-0 fw-bold"><i class="bi bi-person-bounding-box text-warning me-2"></i>Ahorcado</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-borderless custom-table mb-0 align-middle">
+                                <thead>
+                                    <tr class="text-info small tracking-wide">
+                                        <th>Jugador</th>
+                                        <th>Resultado</th>
+                                        <th class="text-center">Letras</th>
+                                        <th class="text-center">Tiempo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (item of ahorcadoRanking(); track $index) {
+                                        <tr class="leaderboard-row">
+                                            <td class="fw-bold text-black">
+                                                @if ($index === 0) { <i class="bi bi-trophy-fill text-warning me-2 glow-icon"></i> }
+                                                @else { <span class="text-black-50 me-2">#{{ $index + 1 }}</span> }
+                                                {{ item.usuario_email.split('@')[0] }}
+                                            </td>
+                                            <td>
+                                                <span class="badge rounded-pill px-3" [ngClass]="item.resultado === 'GANÓ' ? 'bg-success' : 'bg-danger'">
+                                                    {{ item.resultado }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center fw-semibold text-black">{{ item.letras_intentadas }}</td>
+                                            <td class="text-center fw-semibold text-info">{{ item.duracion_segundos }}s</td>
+                                        </tr>
+                                    } @empty {
+                                        <tr><td colspan="4" class="text-center py-4 text-black-50">No hay partidas registradas</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="ranking-card card h-100 shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-dark text-white p-3 border-0 rounded-top-4" style="border-bottom: 2px solid #0d6efd !important;">
+                        <h4 class="mb-0 fw-bold"><i class="bi bi-playing-cards text-primary me-2"></i>Mayor o Menor</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-borderless custom-table mb-0 align-middle">
+                                <thead>
+                                    <tr class="text-info small tracking-wide">
+                                        <th>Jugador</th>
+                                        <th class="text-end">Puntaje Total</th>
+                                        <th class="text-end">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (item of mayorMenorRanking(); track $index) {
+                                        <tr class="leaderboard-row">
+                                            <td class="fw-bold text-truncate text-black" style="max-width: 150px;">
+                                                @if ($index === 0) { <i class="bi bi-trophy-fill text-warning me-2 glow-icon"></i> }
+                                                @else { <span class="text-black-50 me-2">#{{ $index + 1 }}</span> }
+                                                {{ item.usuario_email.split('@')[0] }}
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="fs-5 fw-black text-primary">{{ item.puntaje }}</span> <span class="small text-white-50">pts</span>
+                                            </td>
+                                            <td class="text-end small text-black-50">{{ formatearFecha(item.fecha) }}</td>
+                                        </tr>
+                                    } @empty {
+                                        <tr><td colspan="3" class="text-center py-4 text-black-50">No hay records aún</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="ranking-card card h-100 shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-dark text-white p-3 border-0 rounded-top-4" style="border-bottom: 2px solid #dc3545 !important;">
+                        <h4 class="mb-0 fw-bold"><i class="bi bi-question-circle text-danger me-2"></i>Preguntados</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-borderless custom-table mb-0 align-middle">
+                                <thead>
+                                    <tr class="text-info small tracking-wide">
+                                        <th>Jugador</th>
+                                        <th class="text-center">Aciertos</th>
+                                        <th style="width: 30%;">Efectividad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (item of preguntadosRanking(); track $index) {
+                                        <tr class="leaderboard-row">
+                                            <td class="fw-bold text-black">
+                                                @if ($index === 0) { <i class="bi bi-trophy-fill text-warning me-2 glow-icon"></i> }
+                                                @else { <span class="text-black-50 me-2">#{{ $index + 1 }}</span> }
+                                                {{ item.usuario_email.split('@')[0] }}
+                                            </td>
+                                            <td class="text-center fw-bold text-black">{{ item.aciertos }} / {{ item.total_preguntas }}</td>
+                                            <td>
+                                                <div class="progress rounded-pill bg-dark" style="height: 8px;">
+                                                    <div class="progress-bar bg-danger rounded-pill" 
+                                                         [style.width]="(item.aciertos / item.total_preguntas * 100) + '%'">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    } @empty {
+                                        <tr><td colspan="3" class="text-center py-4 text-black-50">Aún no hay genios registrados</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-6">
+                <div class="ranking-card card h-100 shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-dark text-white p-3 border-0 rounded-top-4" style="border-bottom: 2px solid #198754 !important;">
+                        <h4 class="mb-0 fw-bold"><i class="bi bi-bullseye text-success me-2"></i>Simón Dice</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="table table-borderless custom-table mb-0 align-middle">
+                                <thead>
+                                    <tr class="text-info small tracking-wide">
+                                        <th>Jugador</th>
+                                        <th class="text-end">Nivel Alcanzado</th>
+                                        <th class="text-end">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (item of simonDiceRanking(); track $index) {
+                                        <tr class="leaderboard-row">
+                                            <td class="fw-bold text-black">
+                                                @if ($index === 0) { <i class="bi bi-trophy-fill text-warning me-2 glow-icon"></i> }
+                                                @else { <span class="text-black-50 me-2">#{{ $index + 1 }}</span> }
+                                                {{ item.usuario_email.split('@')[0] }}
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="fs-5 fw-black text-success">{{ item.puntaje }}</span> <span class="small text-white-50">lvl</span>
+                                            </td>
+                                            <td class="text-end small text-black-50">{{ formatearFecha(item.fecha) }}</td>
+                                        </tr>
+                                    } @empty {
+                                        <tr><td colspan="3" class="text-center py-4 text-black-50">No hay desafíos registrados</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

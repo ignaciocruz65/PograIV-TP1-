@@ -1,39 +1,85 @@
-.mesa-juego {
-    background: radial-gradient(circle, #2c3e50 0%, #1a252f 100%);
-    border-radius: 20px;
-    padding: 3rem;
-    color: white;
-}
-
-.carta-en-juego {
-    width: 160px;
-    height: 230px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+:host {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    border: 2px solid #e0e0e0;
-    transition: transform 0.2s ease;
+    flex: 1;
+    flex-direction: column;
 }
 
-.carta-en-juego-text {
-    font-size: 6rem;
-    font-weight: 800;
-    color: #212529;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+/* Borde exterior de la máquina/mesa */
+.game-card {
+    border: 4px solid #212529 !important; /* Borde oscuro sólido, nada de transparencias raras */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
 }
 
-.btn-jugar-denuevo {
-    background: linear-gradient(45deg, #00b09b, #96c93d);
-    border: none;
+/* El "Tapete" de la mesa de casino (Fondo del card-body) */
+.casino-felt {
+    background: radial-gradient(circle at center, #2a8b5a 0%, #114228 100%);
+}
+
+/* Estilos de las cartas para que parezcan físicas */
+.shadow-card {
+    box-shadow: -4px 6px 15px rgba(0,0,0,0.5);
+    border: 2px solid #ffffff; /* Borde blanco para enmarcar la carta */
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Resaltamos la carta descubierta con un borde amarillo */
+.active-card {
+    border: 3px solid #ffc107; 
+}
+
+.deck-container:hover .shadow-card {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.remaining-badge {
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Utilidades para los textos */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.tracking-wide {
+    letter-spacing: 2px;
+}
+
+.shadow-icon {
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
+/* Botones de Acción (Estilo tradicional pero pulido) */
+.btn-action {
+    border: 2px solid #ffffff;
     color: white;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
-.btn-jugar-denuevo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 176, 155, 0.4);
+/* Verde clásico para "Mayor" */
+.btn-mayor {
+    background-color: #198754; 
+}
+.btn-mayor:hover:not(:disabled) {
+    background-color: #146c43;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(25, 135, 84, 0.4) !important;
+}
+
+/* Rojo clásico para "Menor" */
+.btn-menor {
+    background-color: #dc3545; 
+}
+.btn-menor:hover:not(:disabled) {
+    background-color: #b02a37;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(220, 53, 69, 0.4) !important;
+}
+
+.btn-action:active:not(:disabled) {
+    transform: translateY(2px);
+}
+
+.animate__pulse {
+    animation-duration: 2s;
 }

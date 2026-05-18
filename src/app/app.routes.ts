@@ -16,12 +16,21 @@ export const routes: Routes = [
     },
     {
         path: 'quien-soy',
-        canActivate: [authGuard],
         loadComponent: () => import('./componentes/quien-soy/quien-soy').then(c => c.QuienSoy)
     },
     {
         path: 'registro',
         loadComponent: () => import('./componentes/registro/registro').then(c => c.Registro)
+    },
+    {
+        path: 'chat',
+        loadComponent: () => import('./componentes/chat/chat').then(c => c.Chat),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'resultados',
+        loadComponent: () => import('./componentes/resultados/resultados').then(c => c.Resultados),
+        
     },
     {
         path: 'juegos',

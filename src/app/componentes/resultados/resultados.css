@@ -1,0 +1,97 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+
+:host {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+/* EL FONDO ANIMADO CON TUS GRADIENTES AZULES */
+.ranking-wrapper {
+    background-color: #030816;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 95% 85%, rgba(0, 82, 204, 0.7) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(0, 51, 153, 0.3) 0%, transparent 70%);
+    min-height: 100vh;
+}
+
+/* LAS TARJETAS (Glassmorphism Oscuro) */
+.ranking-card {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 102, 255, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.ranking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Tipografía y utilidades */
+.fw-black {
+    font-weight: 900;
+}
+
+.tracking-wide {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.text-shadow {
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+/* LA TABLA */
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background-color: transparent;
+}
+
+/* FILAS DE LOS JUGADORES (Placas Oscuras) */
+.leaderboard-row {
+    background-color: rgba(255, 255, 255, 0.05); /* Un blanco casi transparente */
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.leaderboard-row td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.leaderboard-row td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Hover de las filas: Se iluminan sutilmente en azul */
+.leaderboard-row:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0, 102, 255, 0.2);
+    z-index: 10;
+    position: relative;
+}
+
+/* Icono brillante para el TOP 1 */
+.glow-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.9));
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Anular color de hover default de bootstrap en la tabla oscura */
+.table-hover > tbody > tr:hover > * {
+    color: inherit;
+    background-color: transparent;
+}

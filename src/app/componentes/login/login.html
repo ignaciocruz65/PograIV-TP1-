@@ -1,54 +1,90 @@
-
-<div class="container vh-100 d-flex justify-content-center align-items-center">
-  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-    <div class="card shadow-lg border-0 rounded-4">
-      <div class="card-header bg-primary text-white text-center rounded-top-4 py-4">
-        <h2 class="fw-bold mb-0">Iniciar Sesión</h2>
+<div class="login-wrapper container-fluid flex-grow-1 d-flex justify-content-center align-items-center py-4">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+    <div class="glass-card card shadow-lg border-0 rounded-4">
+      
+      <div class="card-header bg-primary text-white text-center rounded-top-4 py-4 border-0">
+        <h2 class="fw-bold mb-0"><i class="bi bi-controller me-2"></i>Iniciar Sesión</h2>
       </div>
 
       <div class="card-body p-4 p-md-5">
-        <form>
+        <form [formGroup]="loginForm">
+          
           @if (errorMsg()) {
-            <div class="alert alert-danger p-2 small border-0 mb-3 text-center">
+            <div class="alert alert-danger p-2 small border-0 mb-3 text-center shadow-sm">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
               {{ errorMsg() }}
             </div>
           }
 
           <div class="form-floating mb-3">
-            <input type="email" name="email" [(ngModel)]="email" class="form-control rounded-3" id="emailInput" placeholder="email">
-            <label for="emailInput">Correo electronico</label>
+            <input type="email" 
+                   formControlName="email" 
+                   class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                   [class.is-invalid]="email?.invalid && email?.touched" 
+                   id="emailInput" 
+                   placeholder="email">
+            <label for="emailInput" class="text-muted"><i class="bi bi-envelope-fill me-2"></i>Correo electrónico</label>
+            
+            @if (email?.invalid && email?.touched) {
+              <div class="invalid-feedback text-start fw-bold">
+                @if (email?.hasError('required')) { El correo es obligatorio. }
+                @else if (email?.hasError('email')) { Formato de correo inválido. }
+              </div>
+            }
           </div>
 
           <div class="form-floating mb-4">
-            <input type="password" name="clave" [(ngModel)]="clave" class="form-control rounded-3" id="passInput" placeholder="pass">
-            <label for="passInput">Contraseña</label>
+            <input type="password" 
+                   formControlName="clave" 
+                   class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                   [class.is-invalid]="clave?.invalid && clave?.touched" 
+                   id="passInput" 
+                   placeholder="pass">
+            <label for="passInput" class="text-muted"><i class="bi bi-lock-fill me-2"></i>Contraseña</label>
+            
+            @if (clave?.invalid && clave?.touched) {
+              <div class="invalid-feedback text-start fw-bold">
+                @if (clave?.hasError('required')) { La contraseña es obligatoria. }
+                @else if (clave?.hasError('minlength')) { Mínimo 6 caracteres requeridos. }
+              </div>
+            }
           </div>
 
-          <div class="d-grid gap-2">
-            <button (click)="ingresar()" [disabled]="cargando()" class="btn btn-primary btn-lg fw-bold rounded-pill shadow-sm" type="button">
+          <div class="d-grid gap-2 mt-2">
+            <button (click)="ingresar()" 
+                    [disabled]="cargando()" 
+                    class="btn btn-primary btn-lg fw-bold rounded-pill shadow hover-scale" 
+                    type="button">
               @if (cargando()) {
-                <span class="spinner-border spinner-border-sm"></span>
+                <span class="spinner-border spinner-border-sm me-2"></span> Autenticando...
               } @else {
-                Ingresar
+                INGRESAR <i class="bi bi-box-arrow-in-right ms-1"></i>
               }
             </button>
           </div>
         </form>
       </div>
 
-      <div class="mt-4 text-center">
-            <p class="text-muted small mb-2">Acceso Rapido</p>
-            <div class="d-flex justify-content-center gap-2">
-              <button (click)="accesoRapido('catzat@gmail.com', 'kamzat')" type="button" class="btn btn-sm btn-outline-secondary rounded-pill">
-                Admin
-              </button>
-            </div>
-          </div>
+      <div class="mt-2 text-center pb-3">
+        <p class="text-muted small mb-2 fw-bold text-uppercase tracking-wide">Acceso Rápido</p>
+        <div class="d-flex justify-content-center gap-2 mb-2">
+          <button (click)="accesoRapido('catzat@gmail.com', 'kamzat')" 
+                  type="button" 
+                  class="btn btn-sm btn-dark rounded-pill px-4 shadow-sm hover-scale">
+            <i class="bi bi-person-badge-fill me-1"></i> Acceso Admin
+          </button>
+          <button (click)="accesoRapido('panchito72@gmail.com', 'panchote')" 
+                  type="button" 
+                  class="btn btn-sm btn-dark rounded-pill px-4 shadow-sm hover-scale">
+            <i class="bi bi-person-badge-fill me-1"></i> Acceso Comun
+          </button>
+        </div>
+      </div>
 
-
-
-      <div class="card-footer text-center bg-light py-3 rounded-bottom-4 border-0">
-        <small class="text-muted">¿No tenes cuenta? <a routerLink="/registro" class="text-primary fw-bold text-decoration-none">Registrate aca</a></small>
+      <div class="card-footer text-center py-3 rounded-bottom-4 border-0" style="background-color: rgba(0,0,0,0.03);">
+        <small class="text-muted fw-semibold">¿No tenés cuenta? 
+          <a routerLink="/registro" class="text-primary fw-bold text-decoration-none ms-1">Registrate acá</a>
+        </small>
       </div>
     </div>
   </div>

@@ -23,7 +23,6 @@ export class App {
   }
 
   async confirmarCerrarSesion() {
-
     Swal.fire({
       title: '¿Cerrar Sesión?',
       text: "Deberás ingresar tus credenciales nuevamente para jugar.",

@@ -1,0 +1,51 @@
+:host {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+/* EL FONDO ANIMADO */
+.login-wrapper {
+    /* Gradiente moderno que pega perfecto con "Playground" */
+    background: linear-gradient(-45deg, #004ede8c, #01219377, #2c536477, #120258b8, #331aaf);
+    background-size: 400% 400%;
+    animation: gradientAnimado 15s ease infinite;
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes gradientAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* LA TARJETA (Efecto Glassmorphism) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.3s ease;
+}
+
+/* Efectos visuales para botones */
+.hover-scale {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-scale:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(13, 110, 253, 0.3) !important;
+}
+
+.hover-scale:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Utilidad para las letras pequeñas */
+.tracking-wide {
+    letter-spacing: 1px;
+}

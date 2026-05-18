@@ -1,0 +1,67 @@
+<div class="chat-page-wrapper container-fluid flex-grow-1 d-flex justify-content-center align-items-center py-4">
+  <div class="chat-container card shadow-lg border-0 rounded-4 overflow-hidden w-100" style="max-width: 900px;">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <div class="bg-primary rounded-circle p-2 me-2 text-white">
+        <i class="bi bi-people-fill"></i>
+      </div>
+      <h6 class="mb-0 fw-bold">Sala Global</h6>
+    </div>
+    <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle">
+      ● En línea
+    </span>
+  </div>
+
+  <div class="card-body chat-messages" #scrollContainer>
+    @for (msj of mensajes(); track msj.id) {
+      <div class="message-wrapper d-flex mb-3" 
+           [ngClass]="{'justify-content-end': msj.usuario_id === usuarioActual()?.id}">
+        
+        <div class="message-content p-2 rounded shadow-sm"
+             [ngClass]="msj.usuario_id === usuarioActual()?.id ? 'bg-success-matte text-white' : 'bg-light-matte text-dark'">
+          
+          <div class="message-header mb-1">
+            <span class="fw-bold small d-block">{{ msj.usuario_email.split('@')[0] }}</span>
+          </div>
+          
+          <div class="message-body text-break">
+            {{ msj.mensaje }}
+          </div>
+
+          <div class="text-end mt-1">
+            <small class="opacity-75" style="font-size: 0.65rem;">
+              {{ formatearFecha(msj.created_at) }}
+            </small>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="card-footer">
+    <form (submit)="$event.preventDefault(); enviar()" class="input-group">
+      <input 
+        type="text" 
+        [(ngModel)]="nuevoMensaje" 
+        name="mensaje"
+        class="form-control" 
+        placeholder="Escribe un mensaje..."
+        autocomplete="off"
+        maxlength="200"
+      >
+      <button 
+        class="btn btn-primary" 
+        type="submit"
+        [disabled]="!nuevoMensaje().trim()"
+      >
+        <i class="bi bi-send-fill"></i>
+      </button>
+    </form>
+    <div class="text-end mt-1 me-3">
+      <small style="font-size: 0.65rem" [ngClass]="nuevoMensaje().length >= 200 ? 'text-danger fw-bold' : 'text-white'">
+        {{ nuevoMensaje().length }}/200
+      </small>
+    </div>
+  </div>
+</div>
+</div>

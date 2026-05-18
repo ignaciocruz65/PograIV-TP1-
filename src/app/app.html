@@ -1,36 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top py-3">
-  <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/home">PLAYGROUND </a>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/quien-soy">Quién Soy</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/juegos">Juegos</a>
-        </li>
-      </ul>
+<div class="d-flex flex-column min-vh-100">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top py-3" style="background-color: #000000 !important; backdrop-filter: blur(11px); color: #000000;">
+    <div class="container">
+      <a class="navbar-brand fw-bold" routerLink="/home" style="backdrop-filter: blur(11px);">PLAYGROUND </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <div class="d-flex align-items-center gap-2">
-        @if (!auth.usuarioActual()) {
-          <a routerLink="/login" class="btn btn-outline-light rounded-pill px-4">Iniciar Sesión</a>
-          <a routerLink="/registro" class="btn btn-primary rounded-pill px-4 shadow-sm">Registrarse</a>
-        } 
-        @else {
-          <span class="text-light me-3 small">
-            Bienvenido, <strong>{{ auth.usuarioActual()?.email | lowercase }}</strong>
-          </span>
-          <button (click)="confirmarCerrarSesion()" class="btn btn-danger rounded-pill px-4 shadow-sm">
-            Cerrar Sesión
-          </button>
-        }
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/quien-soy">Quién Soy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/juegos">Juegos</a>
+          </li>
+          @if (auth.usuarioActual()) {
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/chat">Chat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/resultados">Resultados</a>
+            </li>
+          }
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          @if (!auth.usuarioActual()) {
+            <a routerLink="/login" class="btn btn-outline-light rounded-pill px-4">Iniciar Sesión</a>
+            <a routerLink="/registro" class="btn btn-primary rounded-pill px-4 shadow-sm">Registrarse</a>
+          } 
+          @else {
+            <span class="text-light me-3 small">
+              Bienvenido, <strong>{{ auth.usuarioActual()?.email.split('@')[0] | lowercase }}</strong>
+            </span>
+            <button (click)="confirmarCerrarSesion()" class="btn btn-danger rounded-pill px-4 shadow-sm">
+              Cerrar Sesión
+            </button>
+          }
+        </div>
       </div>
     </div>
-  </div>
-</nav>
-
-<router-outlet></router-outlet>
+  </nav>
+  <main class="flex-grow-1 d-flex flex-column">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,66 +1,109 @@
-<div class="container vh-100 d-flex justify-content-center align-items-center">
-  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-    
-    <div class="card shadow-lg border-0 rounded-4">
-      <div class="card-header bg-success text-white text-center rounded-top-4 py-4">
-        <h2 class="fw-bold mb-0">Registrarse</h2>
+<div class="registro-wrapper container-fluid flex-grow-1 d-flex justify-content-center align-items-center py-4">
+  <div class="col-12 col-sm-11 col-md-10 col-lg-8 col-xl-6">
+    <div class="glass-card card shadow-lg border-0 rounded-4">
+      
+      <div class="card-header bg-success text-white text-center rounded-top-4 py-4 border-0">
+        <h2 class="fw-bold mb-0"><i class="bi bi-person-plus-fill me-2"></i>Crear Cuenta</h2>
       </div>
       
       <div class="card-body p-4 p-md-5">
-        <form>
+        <form [formGroup]="registroForm">
+          
           @if (errorMsg()) {
-            <div class="alert alert-danger border-0 small mb-3">
-              {{ errorMsg() }}
+            <div class="alert alert-danger border-0 small mb-4 text-center py-2 shadow-sm">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMsg() }}
             </div>
           }
 
-          <div class="form-floating mb-3">
-            <input type="text" name="nombre" [(ngModel)]="nombre" class="form-control rounded-3" id="nombre" placeholder="Nombre">
-            <label for="nombre">Nombre</label>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="form-floating">
+                <input type="text" formControlName="nombre" class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                       [class.is-invalid]="nombre?.invalid && nombre?.touched" id="nombre" placeholder="Nombre">
+                <label for="nombre" class="text-muted"><i class="bi bi-person-vcard-fill me-2"></i>Nombre</label>
+                @if (nombre?.hasError('pattern') && nombre?.touched) {
+                  <div class="invalid-feedback text-start fw-bold">Solo letras.</div>
+                }
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <div class="form-floating">
+                <input type="text" formControlName="apellido" class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                       [class.is-invalid]="apellido?.invalid && apellido?.touched" id="apellido" placeholder="Apellido">
+                <label for="apellido" class="text-muted"><i class="bi bi-person-vcard me-2"></i>Apellido</label>
+                @if (apellido?.hasError('pattern') && apellido?.touched) {
+                  <div class="invalid-feedback text-start fw-bold">Solo letras.</div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="form-floating">
+                <input type="number" formControlName="edad" class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                       [class.is-invalid]="edad?.invalid && edad?.touched" id="edad" placeholder="Edad">
+                <label for="edad" class="text-muted"><i class="bi bi-calendar3 me-2"></i>Edad</label>
+                @if (edad?.hasError('edadMinima') && edad?.touched) {
+                  <div class="invalid-feedback text-start fw-bold">{{ edad?.getError('edadMinima') }}</div>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-8 mb-3">
+              <div class="form-floating">
+                <input type="email" formControlName="email" class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                       [class.is-invalid]="email?.invalid && email?.touched" id="correo" placeholder="Correo electrónico">
+                <label for="correo" class="text-muted"><i class="bi bi-envelope-fill me-2"></i>Correo electrónico</label>
+                @if (email?.hasError('email') && email?.touched) {
+                  <div class="invalid-feedback text-start fw-bold">Formato inválido.</div>
+                }
+              </div>
+            </div>
           </div>
           
-          <div class="form-floating mb-3">
-            <input type="text" name="apellido" [(ngModel)]="apellido" class="form-control rounded-3" id="apellido" placeholder="Apellido">
-            <label for="apellido">Apellido</label>
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-floating">
+                <input type="password" formControlName="clave" class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                       [class.is-invalid]="clave?.invalid && clave?.touched" id="pass" placeholder="Contraseña">
+                <label for="pass" class="text-muted"><i class="bi bi-lock-fill me-2"></i>Contraseña</label>
+                @if (clave?.hasError('minlength') && clave?.touched) {
+                  <div class="invalid-feedback text-start fw-bold">Mínimo 6 caracteres.</div>
+                }
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="form-floating">
+                <input type="password" formControlName="repiteClave" class="form-control bg-light rounded-3 border-0 shadow-sm" 
+                       [class.is-invalid]="repiteClave?.invalid && repiteClave?.touched" id="repiteClave" placeholder="Repetir Contraseña">
+                <label for="repiteClave" class="text-muted"><i class="bi bi-shield-lock-fill me-2"></i>Confirmar Clave</label>
+                @if (repiteClave?.hasError('noCoincide') && repiteClave?.touched) {
+                  <div class="invalid-feedback text-start fw-bold">No coinciden.</div>
+                }
+              </div>
+            </div>
           </div>
 
-          <div class="form-floating mb-3">
-            <input type="number" name="edad" [(ngModel)]="edad" class="form-control rounded-3" id="edad" placeholder="Edad">
-            <label for="edad">Edad</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="email" name="email" [(ngModel)]="email" class="form-control rounded-3" id="correo" placeholder="Correo electrónico">
-            <label for="correo">Correo electrónico</label>
-          </div>
-          
-          <div class="form-floating mb-4">
-            <input type="password" name="clave" [(ngModel)]="clave" class="form-control rounded-3" id="pass" placeholder="Contraseña">
-            <label for="pass">Contraseña</label>
-          </div>
-
-          <div class="d-grid gap-2">
-            <button 
-              (click)="registrar()" 
-              [disabled]="cargando()" 
-              class="btn btn-success btn-lg fw-bold rounded-pill shadow-sm" 
-              type="button">
-              
+          <div class="d-grid mt-2">
+            <button (click)="registrar()" [disabled]="cargando()" class="btn btn-success btn-lg fw-bold rounded-pill shadow hover-scale" type="button">
               @if (cargando()) {
-                <span class="spinner-border spinner-border-sm" role="status"></span>
-                Enviando...
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span> Registrando...
               } @else {
-                Registrarse
+                REGISTRARSE <i class="bi bi-check-circle-fill ms-1"></i>
               }
             </button>
           </div>
         </form>
       </div>
       
-      <div class="card-footer text-center bg-light py-3 rounded-bottom-4 border-0">
-        <small class="text-muted">¿Ya tenes cuenta? <a routerLink="/login" class="text-success fw-bold text-decoration-none">Inicia sesion aca</a></small>
+      <div class="card-footer text-center py-4 rounded-bottom-4 border-0" style="background-color: rgba(0,0,0,0.03);">
+        <small class="text-muted fw-semibold">¿Ya tenés cuenta? 
+          <a routerLink="/login" class="text-success fw-bold text-decoration-none ms-1">Iniciá sesión acá</a>
+        </small>
       </div>
     </div>
-
   </div>
 </div>

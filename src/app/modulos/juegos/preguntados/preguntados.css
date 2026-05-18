@@ -1,0 +1,70 @@
+
+.preguntados-wrapper {
+    background: radial-gradient(circle at top right, #ff4b4b 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100%;
+    width: 100%;
+}
+
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 3px solid #212529 !important; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+
+.pokemon-display {
+    background: radial-gradient(circle, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px dashed #ced4da;
+    max-width: 350px;
+}
+
+.pokemon-img {
+    max-height: 220px;
+    filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.2));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pokemon-display:hover .pokemon-img {
+    transform: scale(1.15) translateY(-10px);
+}
+
+.btn-opcion {
+    background-color: #ffffff;
+    color: #212529;
+    border: 2px solid #212529;
+    position: relative;
+    transition: all 0.1s ease;
+    box-shadow: 0 4px 0 #212529 !important; 
+}
+
+.btn-opcion:hover:not(:disabled) {
+    background-color: #ffc107; 
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #212529 !important;
+}
+
+.btn-opcion:active:not(:disabled) {
+    transform: translateY(4px); 
+    box-shadow: 0 0px 0 #212529 !important;
+}
+
+
+.fw-black {
+    font-weight: 900;
+}
+
+.tracking-wide {
+    letter-spacing: 1.5px;
+}
+
+
+@media (max-width: 576px) {
+    .btn-opcion {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+}

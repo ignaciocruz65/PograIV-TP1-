@@ -1,19 +1,101 @@
-.profile-img {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid white;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    margin-top: -80px;
-    background-color: #fff;
+:host {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
-.utn-badge {
-    background-color: #005b9f;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.9rem;
+/* FONDO ANIMADO CON TUS GRADIENTES AZULES */
+.quien-soy-wrapper {
+    background-color: #030816;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 95% 85%, rgba(0, 82, 204, 0.7) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(0, 51, 153, 0.3) 0%, transparent 70%);
+    min-height: 100vh;
+}
+
+/* EFECTO GLASSMORPHISM OSCURO */
+.glass-card {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 102, 255, 0.2) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.3s ease;
+}
+
+/* AVATAR ESTILO ARCADE */
+.profile-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 4px solid #030816; /* Borde oscuro para separar del fondo */
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.5) !important; /* Resplandor azul */
+    margin-top: -70px;
+    background-color: #1a1a24;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* BADGES PERSONALIZADOS PARA EL TEMA OSCURO */
+.custom-badge-primary {
+    background-color: rgba(13, 110, 253, 0.15);
+    color: #8bb9fe;
+}
+
+.custom-badge-dark {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #adb5bd;
+}
+
+/* CAJA DE REGLAS DEL JUEGO */
+.rules-box {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(13, 110, 253, 0.2);
+    border-left: 4px solid #00c6ff; /* Acento azul cian a la izquierda */
+}
+
+/* ESTILO DE LISTA PERSONALIZADO */
+.custom-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.custom-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.custom-list li::before {
+    content: "▹"; /* Viñeta retro */
+    position: absolute;
+    left: 0;
+    color: #00c6ff;
+    font-weight: bold;
+}
+
+/* UTILIDADES Y ANIMACIONES */
+.fw-black {
+    font-weight: 900;
+}
+
+.tracking-wide {
+    letter-spacing: 1.5px;
+}
+
+.text-shadow {
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.hover-scale {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: translateY(-3px);
+}
+
+.profile-img.hover-scale:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 102, 255, 0.8) !important;
 }

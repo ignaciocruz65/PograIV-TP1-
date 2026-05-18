@@ -1,0 +1,54 @@
+:host {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+/* EL FONDO ANIMADO (Tonalidades verdes/esmeralda) */
+.registro-wrapper {
+    background: linear-gradient(-45deg, #093028, #237A57, #134E5E, #71B280);
+    background-size: 400% 400%;
+    animation: gradientAnimado 15s ease infinite;
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes gradientAnimado {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* LA TARJETA (Efecto Glassmorphism) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.3s ease;
+}
+
+/* Efectos visuales para el botón */
+.hover-scale {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-scale:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(25, 135, 84, 0.4) !important;
+    /* Sombra verde (success) */
+}
+
+.hover-scale:active:not(:disabled) {
+    transform: translateY(0);
+}

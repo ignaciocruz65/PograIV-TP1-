@@ -9,7 +9,6 @@ export const authGuard = () => {
   if (authService.usuarioActual()) {
     return true;
   }
-
   console.log('acceso denegado, pal login ');
   router.navigate(['/login']);
   return false;

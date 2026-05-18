@@ -1,0 +1,71 @@
+<div class="ahorcado-wrapper container-fluid flex-grow-1 d-flex justify-content-center align-items-center py-4">
+    <div class="col-12 col-lg-10 col-xl-9">
+        
+        <div class="game-card card shadow-lg border-0 rounded-4 overflow-hidden">
+            <div class="card-header bg-dark text-white p-3 d-flex justify-content-between align-items-center border-0">
+                <h4 class="mb-0 fw-bold tracking-wide"><i class="bi bi-controller me-2 text-primary"></i>Ahorcado</h4>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge bg-primary fs-6 shadow-sm px-3 py-2 rounded-pill border border-primary">
+                        Puntaje: {{ puntaje() }}
+                    </span>
+                    <span class="badge fs-6 shadow-sm px-3 py-2 rounded-pill border" 
+                          [ngClass]="cantidadErrores() >= 5 ? 'bg-danger border-danger' : 'bg-warning text-dark border-warning'">
+                        Vidas: {{ 6 - cantidadErrores() }} / 6
+                    </span>
+                </div>
+            </div>
+
+            <div class="card-body p-4 p-md-5 dark-board">
+                <div class="row align-items-center">
+                    
+                    <div class="col-md-5 mb-5 mb-md-0 text-center">
+                        <div class="canvas-container p-3 rounded-4 mx-auto shadow position-relative">
+                            <div class="pin-decor"></div>
+                            <img [src]="'/assets/ahorcado/ahorcado' + cantidadErrores() + '.png'" 
+                                 alt="Progreso del Ahorcado" 
+                                 class="img-fluid ahorcado-img"
+                                 style="height: auto; max-height: 280px; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 d-flex flex-column align-items-center">
+                        
+                        <div class="d-flex justify-content-center flex-wrap gap-2 mb-5 w-100">
+                            @for (letra of palabraVisual(); track $index) {
+                                <div class="letter-slot d-flex align-items-center justify-content-center fw-bold fs-2 shadow"
+                                     [class.filled]="letra !== '_'">
+                                    {{ letra === '_' ? '' : letra }}
+                                </div>
+                            }
+                        </div>
+
+                        <div class="keyboard-grid d-flex flex-wrap justify-content-center gap-2 mb-4">
+                            @for (letra of abecedario; track letra) {
+                                <button 
+                                    class="btn keyboard-btn fw-bold shadow-sm"
+                                    [class.btn-success]="letrasCorrectas().includes(letra)"
+                                    [class.btn-danger]="letrasIncorrectas().includes(letra)"
+                                    [class.tecla-neutra]="!letrasCorrectas().includes(letra) && !letrasIncorrectas().includes(letra)"
+                                    [disabled]="letrasCorrectas().includes(letra) || letrasIncorrectas().includes(letra) || juegoGanado() || juegoPerdido()"
+                                    (click)="presionarLetra(letra)">
+                                    {{ letra }}
+                                </button>
+                            }
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3 mt-3 pt-4 border-top border-secondary w-100 border-opacity-50">
+                            <button class="btn btn-primary rounded-pill px-4 px-md-5 fw-bold shadow-sm action-btn" (click)="iniciarJuego()">
+                                <i class="bi bi-arrow-clockwise me-1"></i> Reiniciar
+                            </button>
+                            <button class="btn btn-outline-light rounded-pill px-4 px-md-5 fw-bold action-btn" (click)="salir()">
+                                Volver a la Sala
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
